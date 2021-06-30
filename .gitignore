@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Data Redis, creada por el docker-compose ###
+/redis-data
