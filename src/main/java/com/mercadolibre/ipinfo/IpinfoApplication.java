@@ -1,4 +1,4 @@
-package com.mercadolibre.ipinfo.ipinfo;
+package com.mercadolibre.ipinfo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
