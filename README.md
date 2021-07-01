@@ -19,9 +19,12 @@ Ademas es posible utilizar los endpoint desde la misma web.</br>
 
 
 ## Tecnologias usadas
-* Spring Boot con Java 8
-* Mongo como DB para persistencia de datos
-* Redis para caching distribuido
+* Java 8
+* Spring Boot con varios de sus modulos (Data, Cache, Cache-Redis, MongoDB, Web). 
+* Mongo como DB para persistencia de datos.
+* Redis para caching distribuido.
+* Docker para contenerizacion de la aplicación.
+* Docker Compose para ejecutar multiples contenedores.
 
 # Ejecución en entorno local:
 
