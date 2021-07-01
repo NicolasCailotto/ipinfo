@@ -2,20 +2,20 @@
 Api Rest para obtener informacion de una IP especifica, tambien permita agregar IPs a una lista de baneadas las cuales no podran consultar la informacion
 
 ## Endpoints disponibles
-* GET http://{host}:{puerto}/v1/api/ip/{ipAddress}
+* GET <code>http://{host}:{puerto}/v1/api/ip/{ipAddress}</code>
 <br> Este request devolver la informacion de la IP solicitada. </br>
-* POST http://{host}:{puerto}/v1/api/ip
+* POST <code>http://{host}:{puerto}/v1/api/ip</code>
 <br> Este metodo recibe una IP en el request body y la guarda como una IP bloqueada no permitiendole consultar la informacion.</br>
-* GET http://{host}:{puerto}/swagger-ui.html
+* GET <code>http://{host}:{puerto}/swagger-ui.html</code>
 <br> Disponibilizacion de la documentacion para cada endpoint. Se muestra informacion de los request esperados, y sus posibles respuestas.
 Ademas es posible utilizar los endpoint desde la misma web.</br>
-* GET http://localhost:8079  SOLO EN ENTORNO DOCKER COMPOSE
+* GET <code>http://localhost:8079</code> SOLO EN ENTORNO DOCKER COMPOSE
 <br> Desde esta url es posible acceder a la herramienta Mongo Express. Es una herramienta web que permite visualizar y modificar las distintas DBs que se encuentras creadas en Mongo</br>
 
-<br> {host} y {puerto} se tiene que reemplazar por el host y puerto donde esta disponible la Api </br>
-<br> {ipAddress} debe ser reemplazado por la direccion IP de la cual se quiere obtener la informacion </br>
+<br> <code>{host}</code> y <code>{puerto}</code> se tiene que reemplazar por el host y puerto donde esta disponible la Api,</br>
+<br> <code>{ipAddress}</code> debe ser reemplazado por la direccion IP de la cual se quiere obtener la informacion </br>
 <br> En el caso de request POST se espera en el body un json del siguiente formato </br>
-<code> { "ipAddress": "172.0.0.1" } </code><br>
+<code>{ "ipAddress": "172.0.0.1" }</code><br>
 
 
 ## Tecnologias usadas
