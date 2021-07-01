@@ -9,6 +9,8 @@ Api Rest para obtener informacion de una IP especifica, tambien permita agregar 
 * GET http://{host}:{puerto}/swagger-ui.html
 <br> Disponibilizacion de la documentacion para cada endpoint. Se muestra informacion de los request esperados, y sus posibles respuestas.
 Ademas es posible utilizar los endpoint desde la misma web.</br>
+* GET http://localhost:8079  SOLO EN ENTORNO DOCKER COMPOSE
+<br> Desde esta url es posible acceder a la herramienta Mongo Express. Es una herramienta web que permite visualizar y modificar las distintas DBs que se encuentras creadas en Mongo</br>
 
 <br> {host} y {puerto} se tiene que reemplazar por el host y puerto donde esta disponible la Api </br>
 <br> {ipAddress} debe ser reemplazado por la direccion IP de la cual se quiere obtener la informacion </br>
@@ -81,3 +83,4 @@ Opcionalmente tambien se podira configurar el Dockerfile para setear estas keys 
 * Servicios Health: La aplicacion tambien tiene disponible un endpoint de health check, es util cuando se usa orquestacion de contenedores y configuracion de HealthCheckProbe 
 * Seguridad: En esta version de la aplicacion no se dispone de seguridad, mas halla de las ips baneadas, en un entorno real se deberia configurar seguridad oAuth o custom.
 * Caché: Actualmente para reducir las consultas a las apis externas se utilizo una cache distribuida (Redis) que tiene configuraciones de TTL (CacheConfig.java) esto permite que si se reciben varios request iguales la api no tenga que volver a ejecutar todos los request. 
+* Persistencia: En el entorno de Docker Compose todo los valores que se persisten en MongoDB como en Redis son guardados en un volumen de la maquina local, lo que permite que los contenedores puedan volver a levantarse y los datos siguen disponibles. 
