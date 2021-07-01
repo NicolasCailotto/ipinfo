@@ -2,25 +2,29 @@ package com.mercadolibre.ipinfo.service.impl;
 
 import com.mercadolibre.ipinfo.builder.IpInformationDTOBuilder;
 import com.mercadolibre.ipinfo.config.cache.CacheNames;
+import com.mercadolibre.ipinfo.controller.request.BannedIp;
 import com.mercadolibre.ipinfo.controller.response.IpInformationDTO;
 import com.mercadolibre.ipinfo.dto.CountryDataDTO;
 import com.mercadolibre.ipinfo.dto.CurrencyDataDTO;
 import com.mercadolibre.ipinfo.dto.IpDataDTO;
+import com.mercadolibre.ipinfo.exception.BannedIpExistException;
+import com.mercadolibre.ipinfo.repository.BannedIpRepository;
 import com.mercadolibre.ipinfo.service.CountryDataService;
 import com.mercadolibre.ipinfo.service.CurrencyDataService;
 import com.mercadolibre.ipinfo.service.IpDataService;
-import com.mercadolibre.ipinfo.service.IpInfoService;
+import com.mercadolibre.ipinfo.service.IpService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This class contains the logic to fetch info for an specific ip
  * from different services
  */
 @Service
-public class IpInfoServiceImpl implements IpInfoService {
+public class IpServiceImpl implements IpService {
 
     /**
      * The IpDataService
@@ -37,10 +41,16 @@ public class IpInfoServiceImpl implements IpInfoService {
      */
     private CurrencyDataService currencyDataService;
 
-    public IpInfoServiceImpl(IpDataService ipDataService, CountryDataService countryDataService, CurrencyDataService currencyDataService) {
+    /**
+     * The BannedIpRepository
+     */
+    private BannedIpRepository bannedIpRepository;
+
+    public IpServiceImpl(IpDataService ipDataService, CountryDataService countryDataService, CurrencyDataService currencyDataService, BannedIpRepository bannedIpRepository) {
         this.ipDataService = ipDataService;
         this.countryDataService = countryDataService;
         this.currencyDataService = currencyDataService;
+        this.bannedIpRepository = bannedIpRepository;
     }
 
 
@@ -77,6 +87,19 @@ public class IpInfoServiceImpl implements IpInfoService {
         ipInformationDTOBuilder.setCurrencies(currenciesData);
 
         return ipInformationDTOBuilder.build();
+    }
+
+    /**
+     * Metodo encargado de guardar un ip para ser baneada
+     * Previamente se valida que el address ya no exista en DB
+     * @param ip que se desea banear
+     * @return el objeto de ip baneado
+     */
+    @Override
+    public BannedIp banIp(BannedIp ip) {
+        Optional<BannedIp> bannedIp = bannedIpRepository.findByIpAddress(ip.getIpAddress());
+        bannedIp.ifPresent(existingIp -> {throw new BannedIpExistException("La IP ya se encuentra baneada.");});
+        return bannedIpRepository.insert(ip);
     }
 
 }

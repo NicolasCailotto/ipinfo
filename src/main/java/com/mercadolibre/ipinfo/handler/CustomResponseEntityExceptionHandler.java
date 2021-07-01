@@ -1,6 +1,7 @@
 package com.mercadolibre.ipinfo.handler;
 
 import com.mercadolibre.ipinfo.controller.response.ErrorResponse;
+import com.mercadolibre.ipinfo.exception.BannedIpExistException;
 import com.mercadolibre.ipinfo.exception.ExternalServiceException;
 import com.mercadolibre.ipinfo.exception.InvalidIpFormatException;
 import com.mercadolibre.ipinfo.exception.IpAccessDeniedException;
@@ -31,5 +32,10 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler(value = InvalidIpFormatException.class)
     protected ResponseEntity<ErrorResponse> handlerInvalidIpFormatException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
+    }
+
+    @ExceptionHandler(value = BannedIpExistException.class)
+    protected ResponseEntity<ErrorResponse> handlerBannedIpExistException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage()));
     }
 }

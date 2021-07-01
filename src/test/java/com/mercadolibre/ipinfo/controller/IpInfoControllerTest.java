@@ -2,7 +2,7 @@ package com.mercadolibre.ipinfo.controller;
 
 import com.mercadolibre.ipinfo.IpinfoApplication;
 import com.mercadolibre.ipinfo.exception.ExternalServiceException;
-import com.mercadolibre.ipinfo.service.IpInfoService;
+import com.mercadolibre.ipinfo.service.IpService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -26,25 +26,25 @@ public class IpInfoControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private IpInfoService ipInfoService;
+    private IpService ipInfoService;
 
     @Test
     public void whenValidInput_thenReturnsOk() throws Exception {
-        mockMvc.perform(get("/v1/api/192.22.65.82/info")
+        mockMvc.perform(get("/v1/api/ip/192.22.65.82")
                 .contentType("application/json"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void whenBlackListedIP_thenReturnsForbibben() throws Exception {
-        mockMvc.perform(get("/v1/api/192.22.65.81/info")
+        mockMvc.perform(get("/v1/api/ip/192.22.65.81")
                 .contentType("application/json"))
                 .andExpect(status().isForbidden());
     }
 
     @Test
     public void whenInvalidIP_thenReturnsBadRequest() throws Exception {
-        mockMvc.perform(get("/v1/api/300.300.300.300/info")
+        mockMvc.perform(get("/v1/api/ip/300.300.300.300")
                 .contentType("application/json"))
                 .andExpect(status().isBadRequest());
     }
@@ -54,7 +54,7 @@ public class IpInfoControllerTest {
         Mockito.when(ipInfoService.getIpInfo(Mockito.anyString()))
                 .thenThrow(new ExternalServiceException("Error en la invocacion a servicios externos"));
 
-        mockMvc.perform(get("/v1/api/200.200.200.200/info")
+        mockMvc.perform(get("/v1/api/ip/200.200.200.200")
                 .contentType("application/json"))
                 .andExpect(status().isConflict());
     }

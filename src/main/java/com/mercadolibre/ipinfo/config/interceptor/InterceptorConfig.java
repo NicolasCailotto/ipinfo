@@ -22,6 +22,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(ipDenyInterceptor).addPathPatterns("/v1/api/{ip}/info");
+        registry.addInterceptor(ipDenyInterceptor).addPathPatterns("/v1/api/ip/{ip}");
     }
 }

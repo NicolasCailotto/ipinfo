@@ -5,7 +5,7 @@ import com.mercadolibre.ipinfo.dto.CountryDataDTO;
 import com.mercadolibre.ipinfo.dto.CurrencyDTO;
 import com.mercadolibre.ipinfo.dto.CurrencyDataDTO;
 import com.mercadolibre.ipinfo.dto.IpDataDTO;
-import com.mercadolibre.ipinfo.service.impl.IpInfoServiceImpl;
+import com.mercadolibre.ipinfo.service.impl.IpServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +33,7 @@ public class IpInfoServiceImplTest {
 
     @Autowired
     @InjectMocks
-    private IpInfoServiceImpl ipInfoService;
+    private IpServiceImpl ipInfoService;
 
     @Test
     public void testReturnIpInformationDTO() {

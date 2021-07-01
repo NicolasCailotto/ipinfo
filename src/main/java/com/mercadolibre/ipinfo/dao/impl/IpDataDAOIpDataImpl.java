@@ -49,15 +49,15 @@ public class IpDataDAOIpDataImpl implements IpDataDAO {
     @Override
     public Optional<IpData> getIpData(String ip) {
         // PathParam especifico del la api que se desea consumir
-        String ipAdressPathParam = "/{ipAdress}";
+        String ipAddressPathParam = "/{ipAddress}";
 
         // Formo el mapa de path params para construir la url
         HashMap<String, Object> pathParams = new HashMap<>();
-        pathParams.put("ipAdress", ip);
+        pathParams.put("ipAddress", ip);
 
         IpData ipData = null;
         try {
-            ipData = restTemplate.getForObject(buildEnpointUrl(ipApiServiceEndoint + ipAdressPathParam, pathParams), IpData.class);
+            ipData = restTemplate.getForObject(buildEnpointUrl(ipApiServiceEndoint + ipAddressPathParam, pathParams), IpData.class);
         } catch (Exception httpClientErrorException) {
             LOGGER.error("Hubo un error al consumir la api externa de IpApi", httpClientErrorException);
             throw new ExternalServiceException("Hubo un error al consumir la api externa de IpApi");

@@ -26,6 +26,36 @@ services:
       ip_info:
         ipv4_address: 172.16.0.6
 
+  mongo-express:
+    image: mongo-express
+    container_name: "mongo-express"
+    hostname: "mongo-express"
+    restart: unless-stopped
+    ports:
+      - 8079:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+    networks:
+      ip_info:
+        ipv4_address: 172.16.0.4
+
+  mongo:
+    image: mongo:4
+    container_name: "mongo"
+    hostname: 'mongo'
+    restart: unless-stopped
+    expose:
+      - 27017
+    ports:
+      - "27017-27019:27017-27019"
+    environment:
+      MONGO_INITDB_DATABASE: blackiplist
+    volumes:
+      - ./data/mongo:/data/db
+    networks:
+      ip_info:
+        ipv4_address: 172.16.0.3
+
 networks:
   ip_info:
     ipam:
