@@ -7,7 +7,7 @@ MAINTAINER cailotto.nicolas@gmail.com
 #expose port 8080
 EXPOSE 8080
 
-COPY config/applicationDocker.properties ./config/application.properties
+COPY config/application-docker.properties ./config/application.properties
 
 #default command
 CMD java -jar ipinfo-api.jar
