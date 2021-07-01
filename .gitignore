@@ -34,3 +34,6 @@ build/
 
 ### Data Redis, creada por el docker-compose ###
 /redis-data
+
+### Mongo data, creada por el docker-compose ###
+/data

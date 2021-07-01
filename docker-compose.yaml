@@ -4,6 +4,8 @@ services:
   redis:
     image: 'redis:latest'
     container_name: "redis-server"
+    hostname: 'redis-server'
+    restart: unless-stopped
     command: --appendonly yes
     ports:
       - "6379:6379"
@@ -20,11 +22,15 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: "ip-info"
+    hostname: 'ip-info'
+    restart: unless-stopped
     ports:
       - "8080:8080"
     networks:
       ip_info:
         ipv4_address: 172.16.0.6
+    depends_on:
+      - mongo
 
   mongo-express:
     image: mongo-express
@@ -38,6 +44,8 @@ services:
     networks:
       ip_info:
         ipv4_address: 172.16.0.4
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo:4
