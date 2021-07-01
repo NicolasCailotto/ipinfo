@@ -9,7 +9,7 @@ Api Rest para obtener informacion de una IP especifica, tambien permita agregar 
 * GET http://{host}:{puerto}/swagger-ui.html
 <br> Disponibilizacion de la documentacion para cada endpoint. Se muestra informacion de los request esperados, y sus posibles respuestas.
 Ademas es posible utilizar los endpoint desde la misma web.</br>
-<br>
+
 <br> {host} y {puerto} se tiene que reemplazar por el host y puerto donde esta disponible la Api </br>
 <br> {ipAddress} debe ser reemplazado por la direccion IP de la cual se quiere obtener la informacion </br>
 <br> En el caso de request POST se espera en el body un json del siguiente formato </br>
@@ -30,7 +30,7 @@ Ademas es posible utilizar los endpoint desde la misma web.</br>
 
 * Ejecución de la api
 1) Iniciar jar
-<br>java -jar target/ipinfo-0.0.1-SNAPSHOT.jar
+<code>java -jar target/ipinfo-0.0.1-SNAPSHOT.jar </code>
 <br>la API quedará expuesta en http://localhost:8081/
 
 # Ejecución con Docker:
@@ -43,13 +43,13 @@ Ademas es posible utilizar los endpoint desde la misma web.</br>
 
 * Ejecución de la api
 1) Compilar la aplicacion 
-<br>mvn clean package</br>
+<code>mvn clean package</code>
 
 2) Buildear imagen de docker 
-<br>docker build -t ip-info-image . </br>
+<code>docker build -t ip-info-image . </code>
 
 3) Correr un contenedor con la imagen previamente creada
-<br>docker run -p 8080:8080 --name ip-info-container ip-info-image </br>
+<code>docker run -p 8080:8080 --name ip-info-container ip-info-image </code>
 <br>la API quedará expuesta en http://localhost:8080/
 
 
@@ -63,7 +63,7 @@ Ademas es posible utilizar los endpoint desde la misma web.</br>
 
 * Ejecución de la api
 1) Compilar la aplicacion 
-<br>mvn clean package</br>
+<code>mvn clean package</code>
 
 2) Correr contenedores con docker-compose
 <code>docker-compose -f docker-compose.yaml up </code>
